@@ -1,0 +1,74 @@
+{% extends 'gtec/base.html' %}
+
+{% load bootstrap %}
+
+{% block title %}Lista de Reservas{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Lista de Reservas</h5>
+
+          {% if reserva|length > 0 %}
+            <p class="card-text">
+              Aqui está a lista de Reservas cadastradas.
+            </p>
+
+            <table class="table">
+              <thead class="thead">
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Valor da Vaga</th>
+                <th scope="col">Hora da Operação</th>
+                <th scope="col">Hora da Saída</th>
+                <th scope="col">Débito ID</th>
+                <th scope="col">ID da Vaga</th>
+                <th scope="col">Hora da Saída</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for reserva in reserva %}
+                <tr>
+                  <th scope="row">{{ reserva.nome }}</th>
+                  <td>{{ reserva.cpf }}</td>
+                  <td>{{ reserva.valor }}</td>
+                  <th>{{ reserva.hora_operacao }}</th>
+                  <td>{{ reserva.hora_prevista_saida }}</td>
+                  <td>{{ reserva.debito_id }}</td>
+                  <td>{{ reserva.id_vaga }}</td>
+                  <td>{{ reserva.hora_saida }}</td>
+                  <td class="text-center container-fluid">
+                    <a href="{% url 'gtec:atualiza_reserva' pk=reserva.id_vaga %}"
+                       class="btn btn-primary">
+                      Atualizar
+                    </a>
+                    <a href="{% url 'gtec:deleta_reserva' pk=reserva.id_vaga %}"
+                      class="btn btn-danger">
+                      Excluir
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+        {% else %}
+          <div class="text-center mt-5 mb-5 jumbotron">
+            <h5>Nenhuma reserva feita ainda.</h5>
+          </div>
+        {% endif %}
+          <hr />
+          <div class="text-right">
+            <a href="{% url 'gtec:cria_reserva' %}" class="btn btn-primary">
+              Cadastrar Cliente
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

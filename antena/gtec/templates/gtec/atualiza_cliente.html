@@ -1,0 +1,35 @@
+{% extends "gtec/base.html" %}
+
+{% load bootstrap %}
+
+{% load widget_tweaks %}
+
+{% block title %}Atualização de Cliente{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Atualizar Dados de Cliente</h5>
+          <form method="post">
+            <!-- Não se esqueça dessa tag -->
+            {% csrf_token %}
+
+            <div>
+                <form action="." method="POST">
+                  {% csrf_token %}
+                  {{ form|bootstrap }}
+                    <hr />
+                    <div class="text-right">
+                      <a href="{% url 'gtec:lista_cliente' %}" class="btn btn-outline-primary">Voltar</a>
+                      <button class="btn btn-primary">Enviar</button>
+                    </div>
+                </form>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

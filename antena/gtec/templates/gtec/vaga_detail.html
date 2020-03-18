@@ -1,0 +1,10 @@
+{% extends 'gtec/index.html' %}
+{% block title %}{{ vaga.id }}{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<h1>{{ vaga.status }}</h1>
+		<p>Publicado por {{ vaga.id }}</p>
+		<p>{{ vaga.hora_dev|linebreaks }}</p>
+	</div> 
+{% endblock %}

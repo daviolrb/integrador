@@ -1,0 +1,70 @@
+{% extends 'gtec/base.html' %}
+
+{% load bootstrap %}
+
+{% block title %}Listagem de Clientes{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Listagem de Clientes</h5>
+
+          {% if cliente|length > 0 %}
+            <p class="card-text">
+              Aqui está a lista de Clientes cadastrados.
+            </p>
+
+            <table class="table">
+              <thead class="thead">
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Sobrenome</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Crédito</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for cliente in cliente %}
+                <tr>
+                  <th scope="row">{{ cliente.nome }}</th>
+                  <td>{{ cliente.sobrenome }}</td>
+                  <td>{{ cliente.cpf }}</td>
+                  <th>{{ cliente.telefone }}</th>
+                  <td>{{ cliente.email }}</td>
+                  <td>{{ cliente.creditos }}</td>
+                  <td class="text-center">
+                    <a href="{% url 'gtec:atualiza_cliente' pk=cliente.nome %}"
+                       class="btn btn-primary">
+                      Atualizar
+                    </a>
+                    <a href="{% url 'gtec:deleta_cliente' pk=cliente.nome %}"
+                      class="btn btn-danger">
+                      Excluir
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+        {% else %}
+          <div class="text-center mt-5 mb-5 jumbotron">
+            <h5>Nenhum cliente cadastrado ainda.</h5>
+          </div>
+        {% endif %}
+          <hr />
+          <div class="text-right">
+            <a href="{% url 'gtec:cria_cliente' %}" class="btn btn-primary">
+              Cadastrar Cliente
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

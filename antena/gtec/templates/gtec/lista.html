@@ -1,0 +1,65 @@
+{% extends 'gtec/base.html' %}
+
+{% load bootstrap %}
+
+{% block title %}Listagem de Vagas{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Listagem de Vagas</h5>
+
+          {% if vaga|length > 0 %}
+            <p class="card-text">
+              Aqui está a lista de Vagas cadastradas.
+            </p>
+
+            <table class="table">
+              <thead class="thead">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Hora Devolução</th>
+                <th scope="col">Status</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for vaga in vaga %}
+                <tr>
+                  <th scope="row">{{ vaga.id }}</th>
+                  <td>{{ vaga.hora_dev }}</td>
+                  <td>{{ vaga.status }}</td>
+                  <td class="text-center">
+                    <a href="{% url 'gtec:atualiza_vaga' pk=vaga.id %}"
+                       class="btn btn-primary">
+                      Atualizar
+                    </a>
+                    <a href="{% url 'gtec:deleta_vaga' pk=vaga.id %}"
+                      class="btn btn-danger">
+                      Excluir
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+        {% else %}
+          <div class="text-center mt-5 mb-5 jumbotron">
+            <h5>Nenhuma vaga cadastrada ainda.</h5>
+          </div>
+        {% endif %}
+          <hr />
+          <div class="text-right">
+            <a href="{% url 'gtec:cadastra_vaga' %}" class="btn btn-primary">
+              Cadastrar Vaga
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

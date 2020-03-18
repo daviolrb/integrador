@@ -1,0 +1,43 @@
+{% extends "gtec/base.html" %}
+
+{% load bootstrap %}
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block title %}Cadastro no Sistema{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Crie seu Cadastro</h5>
+          <p class="card-text">
+            Complete o cadastro abaixo para criar uma conta no sistema.
+          </p>
+          <form method="post">
+            <!-- Não se esqueça dessa tag -->
+            {% csrf_token %}
+
+            <div>
+              <form action="." method="POST">
+                  {% csrf_token %}
+                  {{ form|bootstrap }}
+                  <div class="text-right">
+                    <a href="{% url 'gtec:lista_cliente' %}" class="btn btn-outline-primary">Voltar</a>
+                    <button class="btn btn-primary">Criar</button>
+                  </div>
+              </form>
+            
+            </div>
+
+            <hr>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
